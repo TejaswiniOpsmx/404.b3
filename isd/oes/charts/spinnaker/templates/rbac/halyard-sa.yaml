@@ -1,0 +1,12 @@
+---
+# Source: oes/charts/spinnaker/templates/rbac/halyard-sa.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: isd-spinnaker-halyard
+  namespace: 404-b3
+  labels:
+    app: "isd-spinnaker"
+    heritage: "Helm"
+    release: "isd"
+    chart: "spinnaker-2.2.3"

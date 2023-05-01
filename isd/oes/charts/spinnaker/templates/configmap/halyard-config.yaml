@@ -1,0 +1,92 @@
+---
+# Source: oes/charts/spinnaker/templates/configmap/halyard-config.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: isd-spinnaker-halyard-config
+  labels:
+    app: "isd-spinnaker"
+    heritage: "Helm"
+    release: "isd"
+    chart: "spinnaker-2.2.3"
+data:
+  install.sh: |
+    #!/bin/bash
+
+    # Wait for the Hal daemon to be ready
+    export DAEMON_ENDPOINT='curl http://isd-spinnaker-halyard:8064/health'
+    export HAL_COMMAND="$DAEMON_ENDPOINT"
+    until $HAL_COMMAND ; do sleep 10 ; done # end of if not gitops
+
+    # This is performed by post-start script in halyard pod
+    # in case gitopsHalyard is enabled
+  clean.sh: |
+    export HAL_COMMAND='hal --daemon-endpoint http://isd-spinnaker-halyard:8064'
+    if $HAL_COMMAND --ready; then
+      $HAL_COMMAND deploy clean -q
+    fi
+  config.sh: |
+    # Spinnaker version
+    
+    $HAL_COMMAND config version edit --version 1.26.6
+    
+
+    # Storage
+    
+    echo encrypted:miniopassword:miniopassword | $HAL_COMMAND config storage s3 edit \
+        --endpoint http://isd-minio:9000 \
+        --access-key-id encrypted:miniopassword:miniopassword \
+        --secret-access-key --bucket spinnaker \
+        --path-style-access true
+    $HAL_COMMAND config storage edit --type s3
+    
+    
+    
+    
+
+    # Docker Registry
+    $HAL_COMMAND config provider docker-registry enable
+
+    if $HAL_COMMAND config provider docker-registry account get dockerhub; then
+      PROVIDER_COMMAND='edit'
+    else
+      PROVIDER_COMMAND='add'
+    fi
+
+    $HAL_COMMAND config provider docker-registry account $PROVIDER_COMMAND dockerhub --address index.docker.io \
+       \
+      --repositories library/alpine,library/ubuntu,library/centos,library/nginx
+
+    $HAL_COMMAND config provider kubernetes enable
+
+    if $HAL_COMMAND config provider kubernetes account get default; then
+      PROVIDER_COMMAND='edit'
+    else
+      PROVIDER_COMMAND='add'
+    fi
+
+    $HAL_COMMAND config provider kubernetes account $PROVIDER_COMMAND default --docker-registries dockerhub \
+                --context default --service-account true \
+                 \
+                --only-spinnaker-managed true \
+                 \
+                 \
+                --omit-namespaces=kube-system,kube-public \
+                 \
+                 \
+                 \
+                --provider-version v2
+    $HAL_COMMAND config deploy edit --account-name default --type distributed \
+                           --location 404-b3
+    $HAL_COMMAND config deploy ha clouddriver enable
+    $HAL_COMMAND config deploy ha echo enable
+
+    # Enable Authentication by default
+    $HAL_COMMAND config security authn ldap edit --url ldap://isd-openldap:389 --user-dn-pattern  'cn={0},dc=example,dc=org'
+    $HAL_COMMAND config security authn ldap enable
+
+    # Enable Authorization
+    $HAL_COMMAND config security authz disable
+
+
+    # Use Deck to route to Gate

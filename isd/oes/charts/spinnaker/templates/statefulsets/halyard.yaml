@@ -1,0 +1,157 @@
+---
+# Source: oes/charts/spinnaker/templates/statefulsets/halyard.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    moniker.spinnaker.io/application: spin
+  name: isd-spinnaker-halyard
+  labels:
+    app: "isd-spinnaker"
+    heritage: "Helm"
+    release: "isd"
+    chart: "spinnaker-2.2.3"
+spec:
+  serviceName: isd-spinnaker-halyard
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "isd-spinnaker"
+      release: "isd"
+      component: halyard
+  template:
+    metadata:
+      annotations:
+        checksum/configmap: aa0e8f605199400af892bd0623fa5ac6860279c30f59b21402b2231cbbd26a52
+        moniker.spinnaker.io/application: spin
+      labels:
+        app: "isd-spinnaker"
+        heritage: "Helm"
+        release: "isd"
+        chart: "spinnaker-2.2.3"
+        component: halyard
+    spec:
+      serviceAccountName: isd-spinnaker-halyard
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      initContainers:
+      - name: "create-halyard-local"
+        image: quay.io/opsmxpublic/awsgit:v3-js
+        command:
+        - sh
+        - /tmp/initscript/init.sh
+        env:
+        - name: GIT_CLONE_PARAM
+          valueFrom:
+            secretKeyRef:
+              name: opsmx-gitops-auth
+              key: gitcloneparam
+        - name: GIT_USER
+          valueFrom:
+            secretKeyRef:
+              name: opsmx-gitops-auth
+              key: gituser
+        - name: GIT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: opsmx-gitops-auth
+              key: gittoken
+        - name: DYNAMIC_ACCOUNTS_REPO
+          valueFrom:
+            secretKeyRef:
+              name: opsmx-gitops-auth
+              key: dynamicaccountsgituri
+        - name: SPINNAKER_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        volumeMounts:
+        - name: halyard-config
+          mountPath: /tmp/config
+        - name: service-settings
+          mountPath: /tmp/service-settings
+        - name: halyard-home
+          mountPath: /tmp/spinnaker
+        - name: additional-profile-config-maps
+          mountPath: /tmp/additionalProfileConfigMaps
+        - name: halyard-initscript
+          mountPath: /tmp/initscript
+      - name: "halyardconfig-update"
+        command:
+        - sh
+        - /tmp/akv2k8s/run.sh
+        image: quay.io/opsmxpublic/k8s-decoder:hal
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        volumeMounts:
+        - name: halyard-home
+          mountPath: /tmp/spinnaker
+        - name: secret-decoder
+          mountPath: /tmp/akv2k8s
+      - name: "halyard-overrideurl"
+        command:
+        - sh
+        - /tmp/autoconfig/call_overrides.sh
+        env:
+        - name: NODE_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.hostIP
+        image: quay.io/opsmxpublic/bitnami-kubectl:1.18.5
+        imagePullPolicy: IfNotPresent
+        resources: {}
+        volumeMounts:
+        - name: halyard-config
+          mountPath: /tmp/config
+        - name: service-settings
+          mountPath: /tmp/service-settings
+        - name: halyard-home
+          mountPath: /tmp/spinnaker
+        - name: additional-profile-config-maps
+          mountPath: /tmp/additionalProfileConfigMaps
+        - name: halyard-initscript
+          mountPath: /tmp/initscript
+        - mountPath: /tmp/autoconfig
+          name: halyard-overrideurl
+      volumes:
+      - name: halyard-home
+        emptyDir: {}
+      - name: halyard-overrideurl
+        configMap:
+          name: isd-spinnaker-halyard-overrideurl
+      - name: secret-decoder
+        configMap:
+          name: isd-spinnaker-spin-secret-decoder
+      - name: reg-secrets
+        secret:
+          secretName: isd-spinnaker-registry
+      - name: additional-profile-config-maps
+        configMap:
+          name: isd-spinnaker-additional-profile-config-maps
+      - name: halyard-config
+        emptyDir: {}
+      - name: service-settings
+        configMap:
+          name: isd-spinnaker-service-settings
+      - name: halyard-initscript
+        configMap:
+          name: isd-spinnaker-halyard-init-script
+      containers:
+      - name: halyard
+        image: quay.io/opsmxpublic/ubi8-spin-halyard:1.28.1-v4.0.2
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "until curl http://localhost:8064/health; do sleep 10 ;done;hal deploy apply"]
+        ports:
+        - containerPort: 8064
+          name: daemon
+        volumeMounts:
+        - name: halyard-home
+          mountPath: /home/spinnaker
+        - name: halyard-config
+          mountPath: /opt/halyard/config
+        - name: reg-secrets
+          mountPath: /opt/registry/passwords

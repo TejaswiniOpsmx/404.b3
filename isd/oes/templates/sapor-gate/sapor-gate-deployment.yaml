@@ -1,0 +1,61 @@
+---
+# Source: oes/templates/sapor-gate/sapor-gate-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    moniker.spinnaker.io/application: isd
+  labels:
+    app: oes
+    component: sapor-gate
+    heritage: "Helm"
+    release: "isd"
+    chart: "oes-4.0.12"
+  name: sapor-gate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oes
+      component: sapor-gate
+  template:
+    metadata:
+      annotations:
+        checksum/secret: 68f74bcf539b143147ec93182922a9856aa8eeeaa1a0bf334cdb6b52608f954b
+        moniker.spinnaker.io/application: isd
+      labels:
+        app: oes
+        component: sapor-gate
+        heritage: "Helm"
+        release: "isd"
+        chart: "oes-4.0.12"
+    spec:
+      containers:
+      - image: quay.io/opsmxpublic/ubi8-oes-spin-gate:v3.12.0-saporgate
+        name: sapor-gate
+        env:
+        - name: JAVA_OPTS
+          value: -XX:MaxRAMPercentage=100.0
+        - name: SPRING_PROFILES_ACTIVE
+          value: overrides,local
+        ports:
+        - containerPort: 8084
+          protocol: TCP
+        resources:
+            {}
+        volumeMounts:
+        - mountPath: /opt/spinnaker/config
+          name: sapor-gate-files
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 8084
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+      volumes:
+      - name: sapor-gate-files
+        secret:
+          secretName: sapor-gate-files

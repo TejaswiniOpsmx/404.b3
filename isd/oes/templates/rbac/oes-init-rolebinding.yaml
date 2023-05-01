@@ -1,0 +1,14 @@
+---
+# Source: oes/templates/rbac/oes-init-rolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding # ClusterRole if you have cluster access
+metadata:
+  name: 404-b3-oes-access
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: view
+subjects:
+- namespace: 404-b3
+  kind: ServiceAccount
+  name: default
