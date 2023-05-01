@@ -1,0 +1,76 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: isd-generate-yamls
+  labels:
+    app: isd
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      containers:
+        - args:
+            - |-
+              set +x
+
+              source /repo/environment
+
+              rm -rf /repo/environment
+
+              chmod +x /repo/upgrade/isd-generate-yamls.sh
+                   
+              export version="$chartVersion"
+
+              export release="$release"
+
+              ls  -ltra /repo/
+
+              /repo/upgrade/isd-generate-yamls.sh
+          command:
+            - /bin/bash
+            - +x
+            - '-c'
+          envFrom:
+            - configMapRef:
+                name: upgrade-inputcm
+          image: 'quay.io/opsmxpublic/helm-bash:v4'
+          name: gen-yamls
+          volumeMounts:
+            - mountPath: /repo
+              name: repo-volume
+      initContainers:
+        - args:
+            - >-
+
+              export gittoken=$(kubectl -n "$namespace" get secret gittoken -o yaml |
+              yq e '.data.gittoken' - | base64 -d)
+
+              git clone https://"$username":"$gittoken"@"$url" -b
+              "$branch" /repo
+               
+              echo "export namespace=$namespace" > /repo/environment
+
+              echo "export gittoken=$gittoken" >> /repo/environment
+
+              echo "export version=$chartVersion" >> /repo/environment
+
+              echo "export release=$release" >> /repo/environment
+
+              ls -ltra /repo
+          command:
+            - /bin/bash
+            - +x
+            - '-c'
+          envFrom:
+            - configMapRef:
+                name: upgrade-inputcm
+          image: quay.io/opsmxpublic/helm-bash:v4-yq-jq
+          name: git-clone
+          volumeMounts:
+            - mountPath: /repo
+              name: repo-volume
+      restartPolicy: Never
+      serviceAccountName: isd-install
+      volumes:
+        - emptyDir: {}
+          name: repo-volume
