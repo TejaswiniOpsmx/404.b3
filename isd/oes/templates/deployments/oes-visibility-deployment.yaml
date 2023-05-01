@@ -47,7 +47,7 @@ spec:
             done;
             echo 'OESDB OK ✓'
       containers:
-      - image: quay.io/opsmxpublic/ubi8-oes-visibility:v4.0.3
+      - image: quay.io/opsmxpublic/ubi8-oes-visibility:v4.0.4.b3
         name: oes-visibility
         ports:
         - containerPort: 8096

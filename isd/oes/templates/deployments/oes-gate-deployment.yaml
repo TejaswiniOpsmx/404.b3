@@ -34,7 +34,7 @@ spec:
         chart: "oes-4.0.12"
     spec:
       containers:
-      - image: quay.io/opsmxpublic/ubi8-gate:v4.0.3
+      - image: quay.io/opsmxpublic/ubi8-gate:v4.0.4.b2
         name: oes-gate
         env:
         - name: spring_profiles_active
