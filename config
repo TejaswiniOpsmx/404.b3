@@ -243,6 +243,13 @@ deploymentConfigurations:
         username: "opsmxdev"
         password: "Cr@ckH@rd@Dev321"
         csrf: true
+      - name: "jenkins1"
+        permissions: {}
+        address: "https://jenkins.opsmx.net:8181/jenkins"
+        username: "opsmxdev"
+        password: "Cr@ckH@rd@Dev321"
+        csrf: true
+        noValidate: false
     travis:
       enabled: false
       masters: []
