@@ -249,7 +249,7 @@ deploymentConfigurations:
         username: "opsmxdev"
         password: "Cr@ckH@rd@Dev321"
         csrf: true
-        noValidate: false
+        noValidate: true
     travis:
       enabled: false
       masters: []
