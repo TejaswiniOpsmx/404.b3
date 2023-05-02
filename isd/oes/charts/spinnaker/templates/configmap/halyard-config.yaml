@@ -86,7 +86,7 @@ data:
     $HAL_COMMAND config security authn ldap enable
 
     # Enable Authorization
-    $HAL_COMMAND config security authz disable
+    $HAL_COMMAND config security authz enable
 
 
     # Use Deck to route to Gate

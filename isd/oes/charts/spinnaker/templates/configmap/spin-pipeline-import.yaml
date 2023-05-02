@@ -39,7 +39,7 @@ data:
     OESGATE=$(grep oes-gate /tmp/inst.status | awk '{print $2}')
     wait_period=$(($wait_period+10))
     READYBASIC=$( [ "$DECK" == "true" ] && [ "$CLOUDCACHING" == "true" ] && [ "$CLOUDRO" == "true" ] && [ "$CLOUDRW" == "true" ] && [ "$CLOUDRODECK" == "true" ] && [ "$FRONT" == "true" ] && [ "$ORCA" == "true" ] && [ "$ECHOWORKER" == "true" ] && [ "$ECHOSCHEDULER" == "true" ] && [ "$SAPORGATE" == "true" ] && [ "$OESGATE" == "true" ];  echo $(($? == 0)) )
-    READY=$READYBASIC
+    READY=$( [ $READYBASIC == 1 ] && [ "$FIAT" == "true" ]; echo $(($? == 0)) )
     if [ $READY == 1 ];
     then
         echo "Spinnaker and OES is Installed and ready"

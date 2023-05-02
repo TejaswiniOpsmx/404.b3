@@ -22,7 +22,7 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/configmap: aa0e8f605199400af892bd0623fa5ac6860279c30f59b21402b2231cbbd26a52
+        checksum/configmap: f6fcaeef1ef0b001cb9c45a8578f6159ac25633bc0c723f523da181c8164b5be
         moniker.spinnaker.io/application: spin
       labels:
         app: "isd-spinnaker"

@@ -42,7 +42,7 @@ data:
 
     wait_period=$(($wait_period+10))
     READYBASIC=$([ "$DECK" == "true" ] && [ "$CLOUDCACHING" == "true" ] && [ "$CLOUDRO" == "true" ] && [ "$CLOUDRW" == "true" ] && [ "$CLOUDRODECK" == "true" ] && [ "$FRONT" == "true" ] && [ "$ORCA" == "true" ]  && [ "$ECHOWORKER" == "true" ] && [ "$ECHOSCHEDULER" == "true" ] && [ "$SAPOR" == "true" ] && [ "$PLATFORM" == "true" ] && [ "$AUTOPILOT" == "true" ] && [ "$IGOR" == "true" ]; echo $(($? == 0)) )
-    READY=$READYBASIC
+    READY=$( [ $READYBASIC == 1 ] && [ "$FIAT" == "true" ] ; echo $(($? == 0)) )
 
 
     if [ $READY == 1 ] ;
