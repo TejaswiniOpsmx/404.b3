@@ -1,18 +1,18 @@
 kubernetes:
   enabled: true
   accounts:
-  - name: "default"
+  - name: "k8s"
     liveManifestCalls: true
     requiredGroupMembership: []
     providerVersion: "v2"
     permissions: {}
     dockerRegistries: []
+    kubeconfigFile: "configserver:kubeCfg_k8s"
     configureImagePullSecrets: true
-    serviceAccount: true
+    serviceAccount: false
     cacheThreads: 1
     namespaces:
-    - "default"
-    - "opsmx-isd"
+    - "404-b3"
     omitNamespaces: []
     kinds: []
     omitKinds:
@@ -20,3 +20,26 @@ kubernetes:
     customResources: []
     cachingPolicies: []
     onlySpinnakerManaged: true
+    checkPermissionsOnStartup: false
+    noValidate: false
+  - name: "default"
+    liveManifestCalls: true
+    requiredGroupMembership: []
+    providerVersion: "v2"
+    permissions: {}
+    dockerRegistries: []
+    kubeconfigFile: "configserver:kubeCfg_default"
+    configureImagePullSecrets: true
+    serviceAccount: false
+    cacheThreads: 1
+    namespaces:
+    - "404-b3"
+    omitNamespaces: []
+    kinds: []
+    omitKinds:
+    - "podPreset"
+    customResources: []
+    cachingPolicies: []
+    onlySpinnakerManaged: true
+    checkPermissionsOnStartup: false
+    noValidate: false

@@ -113,7 +113,7 @@ deploymentConfigurations:
       enabled: false
     vault:
       enabled: false
-    location: SPINNAKER_NAMESPACE
+    location: "SPINNAKER_NAMESPACE"
     customSizing:
       front50:
         requests:
@@ -173,58 +173,9 @@ deploymentConfigurations:
           cpu: "500m"
       monitoring-daemon:
         requests:
-          memory: 70Mi
-          cpu: 100m
+          memory: "70Mi"
+          cpu: "100m"
     sidecars: {}
-#    sidecars:
-#      spin-clouddriver-caching:
-#      - name: k8s-config-sync
-#        dockerImage: quay.io/konikris/k8s-decoder:git-k8s
-#        command: ["sh", "-c"]
-#        args: ["while true; do sh /tmp/script/k8config-sync.sh; sleep 60s; done"]
-#        configMapVolumeMounts:
-#        - configMapName: k8config-sync
-#          mountPath: /tmp/script
-#        mountPath: /opsmx
-#        secretVolumeMounts:
-#          - secretName: opsmx-gitops-auth
-#            mountPath: /tmp/secret
-#      spin-clouddriver-ro:
-#      - name: k8s-config-sync
-#        dockerImage: quay.io/konikris/k8s-decoder:git-k8s
-#        command: ["sh", "-c"]
-#        args: ["while true; do sh /tmp/script/k8config-sync.sh; sleep 60s; done"]
-#        configMapVolumeMounts:
-#        - configMapName: k8config-sync
-#          mountPath: /tmp/script
-#        mountPath: /opsmx
-#        secretVolumeMounts:
-#          - secretName: opsmx-gitops-auth
-#            mountPath: /tmp/secret 
-#      spin-clouddriver-ro-deck:
-#      - name: k8s-config-sync
-#        dockerImage: quay.io/konikris/k8s-decoder:git-k8s
-#        command: ["sh", "-c"]
-#        args: ["while true; do sh /tmp/script/k8config-sync.sh; sleep 60s; done"]
-#        configMapVolumeMounts:
-#        - configMapName: k8config-sync
-#          mountPath: /tmp/script
-#        mountPath: /opsmx
-#        secretVolumeMounts:
-#          - secretName: opsmx-gitops-auth
-#            mountPath: /tmp/secret
-#      spin-clouddriver-rw:
-#      - name: k8s-config-sync
-#        dockerImage: quay.io/konikris/k8s-decoder:git-k8s
-#        command: ["sh", "-c"]
-#        args: ["while true; do sh /tmp/script/k8config-sync.sh; sleep 60s; done"]
-#        configMapVolumeMounts:
-#        - configMapName: k8config-sync
-#          mountPath: /tmp/script
-#        mountPath: /opsmx
-#        secretVolumeMounts:
-#          - secretName: opsmx-gitops-auth
-#            mountPath: /tmp/secret
     initContainers: {}
     hostAliases: {}
     affinity: {}
@@ -284,8 +235,14 @@ deploymentConfigurations:
   timezone: "America/Los_Angeles"
   ci:
     jenkins:
-      enabled: false
-      masters: []
+      enabled: true
+      masters:
+      - name: "jenkins-validate"
+        permissions: {}
+        address: "https://jenkins.opsmx.net:8181/jenkins"
+        username: "opsmxdev"
+        password: "Cr@ckH@rd@Dev321"
+        csrf: true
     travis:
       enabled: false
       masters: []
@@ -309,11 +266,11 @@ deploymentConfigurations:
     apiSecurity:
       ssl:
         enabled: false
-      overrideBaseUrl: /gate/
+      overrideBaseUrl: "/gate/"
     uiSecurity:
       ssl:
         enabled: false
-      overrideBaseUrl: PROTOCOL://OVERRIDE_DECK_URL
+      overrideBaseUrl: "PROTOCOL://OVERRIDE_DECK_URL"
     authn:
       oauth2:
         enabled: false
@@ -356,21 +313,21 @@ deploymentConfigurations:
       accounts: []
     github:
       enabled: true
-      accounts: 
-      - name: opsmxdemo_account
+      accounts:
+      - name: "opsmxdemo_account"
     gitlab:
       enabled: false
       accounts: []
     gitrepo:
-      enabled: true 
-      accounts: 
-      - name: opsmx_repo
+      enabled: true
+      accounts:
+      - name: "opsmx_repo"
     http:
       enabled: false
       accounts: []
     helm:
-      enabled: true 
-      accounts: 
+      enabled: true
+      accounts:
       - name: "opsmx-oes-helm-repo"
         repository: "https://helmcharts.opsmx.com"
     s3:

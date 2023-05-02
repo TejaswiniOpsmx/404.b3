@@ -31,7 +31,7 @@ spec:
         chart: "oes-4.0.12"
     spec:
       containers:
-      - image: quay.io/opsmxpublic/ubi8-oes-ui:v4.0.3
+      - image: quay.io/opsmxpublic/ubi8-oes-ui:v4.0.4.b3
         name: oes-ui
         env:
         ports:
