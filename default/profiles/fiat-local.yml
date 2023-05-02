@@ -1,8 +1,9 @@
 #If user need to set admin roles to the fiat
-#fiat:
-#  admin:
-#    roles:
-#      - 77xx939ops
+fiat:
+  admin:
+    roles:
+      - admin
+      - 77xx939ops
 auth:
   groupMembership:
     service: ldap
@@ -16,25 +17,29 @@ auth:
       userDnPattern: cn={0},dc=example,dc=org
 
 #Please uncomment below section if spinnakerrbac is enabled and provide appropriate permissions
-#auth.permissions.provider.pipeline: aggregate
-#auth.permissions.source.pipeline.prefix:
-#  enabled: true
-#  prefixes:
-#   - prefix: "dev*"
-#     permissions:
-#       READ:
-#       - "devteam-group"
-#       - "qateam"
-#       WRITE:
-#       - "devteam-group"
-#       EXECUTE:
-#       - "devteam-group"
-#   - prefix: "qa*"
-#     permissions:
-#       READ:
-#       - "qateam"
-#       - "devteam-group"
-#       WRITE:
-#       - "qateam"
-#       EXECUTE:
-#       - "qateam"
+auth.permissions.provider.pipeline: aggregate
+auth.permissions.source.pipeline.prefix:
+  enabled: true
+  prefixes:
+    - prefix: "dev*"
+      permissions:
+        READ:
+          - "devops"
+          - "uat"
+          - "dev"
+        WRITE:
+          - "dev"
+        EXECUTE:
+          - "dev"
+    - prefix: "uat*"
+      permissions:
+        READ:
+          - "devops"
+          - "uat"
+        WRITE:
+           - "uat"
+        EXECUTE:
+          - "devops"
+#If user need to set admin roles to the fiat
+---
+
