@@ -19,6 +19,10 @@ global:
   ssl:
     enabled: true # Set to true if using "httpS" urls. TLS certificates must be generated for the above URL
 
+  commonGate:
+    enabled: true
+    spinnakerRBAC: true
+
   certManager:
     installed: false # Set to true if you have cert-manager installed in the cluster, the URL must be accessible from the internet
 
@@ -74,6 +78,19 @@ spinnaker:
       dynAccntConfigPath: /          #relative path from repository root folder
       token: encrypted:gittoken:gittoken  # Token corresponding to spinnaker.gitopsHalyard.repo.username
 
+    pipelinePromotion:  # GitHub only,  Not supportd on S3 or Stash
+      enabled: true
+      type: git  # git, s3, stash
+      organization: TejaswiniOpsmx  # Also called "project" in some repos
+      repository: 404.b3  # bucket name in case of S3
+      rootFolder: pipeline/
+      ##### ONLY In case of S3
+      baseUrl: github.com  #  "git_url"
+      username: TejaswiniOpsmx
+      token: encrypted:gittoken:gittoken
+      ##SSH key based comminication, sshkey is passed in the secret after helm installation edit secret "git-token" and pass BASE64 encoded id_rsa to git_secret_sshkey
+      ##make sure make empty value for "git_secret_token" in the secret if NOT using SSH
+      branch: main  
   ########################################################################################
   # Lines below this do not need to be changed except where external SSO and DBs are used
   ########################################################################################
