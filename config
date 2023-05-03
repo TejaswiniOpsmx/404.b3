@@ -235,8 +235,12 @@ deploymentConfigurations:
   timezone: "America/Los_Angeles"
   ci:
     jenkins:
-      enabled: false
-      masters: []
+      - name: "jenkins-validate"
+        permissions: {}
+        address: "https://jenkins.opsmx.net:8181/jenkins"
+        username: "opsmxdev"
+        password: "Cr@ckH@rd@Dev321"
+        csrf: true
     travis:
       enabled: false
       masters: []
