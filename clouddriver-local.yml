@@ -43,24 +43,3 @@ kubernetes:
     onlySpinnakerManaged: true
     checkPermissionsOnStartup: false
     noValidate: false
-  - name: "kubernetes"
-    liveManifestCalls: true
-    requiredGroupMembership: []
-    providerVersion: "v2"
-    permissions: {}
-    dockerRegistries: []
-    kubeconfigFile: "configserver:kubeCfg_kubernetes"
-    configureImagePullSecrets: true
-    serviceAccount: false
-    cacheThreads: 1
-    namespaces:
-    - "404-b3"
-    omitNamespaces: []
-    kinds: []
-    omitKinds:
-    - "podPreset"
-    customResources: []
-    cachingPolicies: []
-    onlySpinnakerManaged: true
-    checkPermissionsOnStartup: false
-    noValidate: false
