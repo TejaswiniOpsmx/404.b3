@@ -60,7 +60,6 @@ deploymentConfigurations:
         jsonPath: "/home/spinnaker/.hal/gcp_gcp.json"
         alphaListed: false
         imageProjects: []
-        noValidate: false
       bakeryDefaults:
         templateFile: "gce.json"
         baseImages: []
