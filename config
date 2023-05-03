@@ -236,7 +236,7 @@ deploymentConfigurations:
   ci:
     jenkins:
       enabled: false
-      masters: []  
+      masters: []
     travis:
       enabled: false
       masters: []
@@ -247,8 +247,12 @@ deploymentConfigurations:
       enabled: false
       masters: []
     gcb:
-      enabled: false
-      accounts: []
+      enabled: true
+      accounts:
+      - name: "gcb-test"
+        project: "sandbox-spin"
+        subscriptionName: "cloud-build-sub"
+        noValidate: false
     codebuild:
       enabled: false
       accounts: []
