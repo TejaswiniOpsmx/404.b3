@@ -53,6 +53,10 @@ deploymentConfigurations:
     google:
       enabled: false
       accounts: []
+        baseImages: []
+        zone: "us-central1-f"
+        network: "default"
+        useInternalIp: false      
     huaweicloud:
       enabled: false
       accounts: []
