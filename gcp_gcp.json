@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sandbox-spin",
+  "private_key_id": "e041467150e31e3e4fa32b9f03066755a3ab503a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC3tlwg8EPBxEPv\nzhxYNRh1XQGKOVOS7aMyJQrfODhF+d48CILU5QPl0IcbmwULfXZlLlSisTkQz6GS\nvnFwcNp+vIVXruOacpPvmsaefM69z0kmI84wGJ5YUR4eGOG02+wFrVBadh/YPG2P\n+ZXiucVgmfMmsoAARg66OombgrEqyFouZ8vSFqJCNSyK1y6RAjzdwiAtKUqYKVMJ\nnblyjlmkvLC6zG1qQ5fJNnJKEdxmDev05FiHTaXpVzn2oW64qiaoiEKp3iS1e6Pf\nK0MXu6RHEOa6mqoG0iBkQZzT30CeWxa5Vys/v6cG3IwDLR2bSdbsJ/pJzhV4KVmE\n9RnzmUIZAgMBAAECggEACBFbXZFHnHpldGIkEbCakh7jQCzRJtjw9jUKaO/5CAOs\n4YyLIv/VX7yRuQyMrcA/reUED6qs7k17/kExo1CQG97kvotzkIxlwvDptjtAwLUE\nyfFqbud0iWgzOdBPFd2kRsHheeje8E9ZDWirzyuS3NxDQXNh1oE9HisPcNOjZapD\nOeUdmGzfTzU6dcLZ1Vu86OTAGzW+740gz0T1qgo5ztUkzHrtMdFet2inm85vkvrL\nfvHTdRptT8WagD7pyLDZCwyHlz9DBCRED/v58uSTndXmupq45nWJw3CCGCWU1YRZ\nuaFp6BTQOmrquQKwJ71VIHejr8d0MeHxgWvq8tETHQKBgQDkC1wp/eY9m40DGelg\n+wVTEwy1rM3q698NXDiPwwPWtLTzBnKJirHsKoou8B8esC8JzGguVfNvqGppdBH9\nUJ6+bIGml+kyQa2Ke4tOJUcSsJ/4zlhK451fUsVWeYKRUbMcU+tem/XzB2UrWuT0\ngqxsJAPtB2T1By7qSk3MsO3grQKBgQDOO74bef+g9UTQbWFh+EEgndtvFfN79jNG\n0g4NL2+ad3NZX/a97/0w1PM6L42WizHSgRQNaNgS2XLshviMHmBchlXhLjBPs2Zt\nRkxUT6I0pQycyXKl1com/1SpBu9zaAknk3n37aWqm7DTVxKi18XZNr0ph6i4MaKK\nn1AA3sdYnQKBgQCdr7FCJBwB+76NJ2y2L71lzWVbdqtIx2MMNPmzhvDvlTMOXSX0\nL6CKInw8qrOKH9/W0a40ZCCZ1AYI90a9N/Mcz6DzFlYc90dN29He7m3v4Ywsmlp5\nJl0anfxwqEL9w1Wrv+egGw39x95QFWD+JiGeAWVpkFRiDl6FiW20nZ9PXQKBgQCO\njeNR8NmPdBqWDBWVd9nk5tkIh17f4AX/vTDzUkfNuSXlsJzJG/ui5oAeR0KSvjK5\nNHoc7sz08pQrBP0HNfQb4Mu6NIg2f2acwEwAt28C/teiBOmX0hjDLhliISYhWteB\nIMLdasrqDGaFH5oFMCtVgy3saBZrA/w73/WYNGYNTQKBgAbBCP41VRtB4zj9InYq\nBZp/jO3fIgiBu6rxozlHXtk5kfLhpA4k6YvXon3bU3LBLw6swY+E0LgP8DmtCuRn\nln9ym5eGf01Jv0DvfKX+Y93Q78T8wYygijNW2H2cNnnLhGFs9ryckVxzzFcME3Za\n76PibmMiMJhd+PfQG7cbCbgU\n-----END PRIVATE KEY-----\n",
+  "client_email": "devp-pubsub-sev@sandbox-spin.iam.gserviceaccount.com",
+  "client_id": "114985867418611319989",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/devp-pubsub-sev%40sandbox-spin.iam.gserviceaccount.com"
+}

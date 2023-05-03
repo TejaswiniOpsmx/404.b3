@@ -51,8 +51,16 @@ deploymentConfigurations:
         - "library/nginx"
       primaryAccount: "dockerhub"
     google:
-      enabled: false
-      accounts: []
+      enabled: true
+      accounts:
+      - name: "gcp"
+        requiredGroupMembership: []
+        permissions: {}
+        project: "my-orbit-project-71824"
+        jsonPath: "/home/spinnaker/.hal/gcp_gcp.json"
+        alphaListed: false
+        imageProjects: []
+        noValidate: false
       bakeryDefaults:
         templateFile: "gce.json"
         baseImages: []
