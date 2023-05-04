@@ -31,24 +31,7 @@ deploymentConfigurations:
       clusters: []
     dockerRegistry:
       enabled: true
-      accounts:
-      - name: "dockerhub"
-        requiredGroupMembership: []
-        permissions: {}
-        address: "https://index.docker.io"
-        email: "fake.email@spinnaker.io"
-        cacheIntervalSeconds: 30
-        clientTimeoutMillis: 60000
-        cacheThreads: 1
-        paginateSize: 100
-        sortTagsByDate: false
-        trackDigests: false
-        insecureRegistry: false
-        repositories:
-        - "library/alpine"
-        - "library/ubuntu"
-        - "library/centos"
-        - "library/nginx"
+      accounts: []
       primaryAccount: "dockerhub"
     google:
       enabled: false
