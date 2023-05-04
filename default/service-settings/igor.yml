@@ -1,4 +1,6 @@
 artifactId: quay.io/opsmxpublic/ubi8-spin-igor:b42e23d-7
+locking: 
+    enabled: true
 kubernetes:
   volumes:
   #- id: ca-trust-bundle
