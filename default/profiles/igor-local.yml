@@ -1,4 +1,6 @@
 spinnaker:
+  locking: 
+    enabled: true
   build:
     pollInterval: 60  # in seconds for all monitors
     pollingSafeguard:
