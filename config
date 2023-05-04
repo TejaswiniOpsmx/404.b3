@@ -160,8 +160,6 @@ deploymentConfigurations:
     sidecars: {}
     initContainers: {}
     hostAliases: {}
-    affinity: {}
-    tolerations: {}
     nodeSelectors: {}
     gitConfig:
       upstreamUser: "spinnaker"
