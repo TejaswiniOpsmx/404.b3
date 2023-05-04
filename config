@@ -35,12 +35,7 @@ deploymentConfigurations:
     google:
       enabled: false
       accounts: []
-      bakeryDefaults:
-        #templateFile: "gce.json"
-        #baseImages: []
-        #zone: "us-central1-f"
-        #network: "default"
-        #useInternalIp: false     
+      bakeryDefaults:    
     huaweicloud:
       enabled: false
       accounts: []
