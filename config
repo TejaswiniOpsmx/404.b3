@@ -30,9 +30,8 @@ deploymentConfigurations:
       accounts: []
       clusters: []
     dockerRegistry:
-      enabled: true
+      enabled: false
       accounts: []
-      primaryAccount: "dockerhub"
     google:
       enabled: false
       accounts: []
@@ -280,7 +279,7 @@ deploymentConfigurations:
           roleProviderType: "FILE"
         ldap:
           roleProviderType: "LDAP"
-      enabled: false
+      enabled: true
   artifacts:
     bitbucket:
       enabled: false
