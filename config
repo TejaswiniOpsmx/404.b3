@@ -30,8 +30,24 @@ deploymentConfigurations:
       accounts: []
       clusters: []
     dockerRegistry:
-      enabled: false
-      accounts: []
+      enabled: true
+      accounts:
+      - name: "gcr-encrypted"
+        username: "_json_key"
+        requiredGroupMembership: []
+        permissions: {}
+        address: "https://gcr.io"
+        email: "shekinah.dadala@opsmx.io"
+        cacheIntervalSeconds: 30
+        clientTimeoutMillis: 60000
+        cacheThreads: 1
+        paginateSize: 100
+        sortTagsByDate: false
+        trackDigests: false
+        insecureRegistry: false
+        repositories: []
+        passwordFile: "/home/spinnaker/.hal/gcr-encrypted_gcr.json"
+        noValidate: true
     google:
       enabled: true
       accounts:
