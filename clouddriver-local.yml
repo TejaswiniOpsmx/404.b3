@@ -43,3 +43,21 @@ kubernetes:
     onlySpinnakerManaged: true
     checkPermissionsOnStartup: false
     noValidate: false
+aws:
+  enabled: true
+  accounts:
+  - name: "aws"
+    requiredGroupMembership: []
+    providerVersion: "v1"
+    permissions: {}
+    accountId: "732813442182"
+    assumeRole: "spinEC2Managed"
+    lifecycleHooks: []
+    regions:
+    - name: "us-west-1"
+    noValidate: false
+  bakeryDefaults:
+    baseImages: []
+  defaultKeyPairTemplate: "{{name}}-keypair"
+  defaultRegions:
+  - name: "us-west-1"
