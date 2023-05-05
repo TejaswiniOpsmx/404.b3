@@ -47,7 +47,6 @@ deploymentConfigurations:
         insecureRegistry: false
         repositories: []
         passwordFile: "/home/spinnaker/.hal/gcr-encrypted_gcr.json"
-        noValidate: true
     google:
       enabled: true
       accounts:
