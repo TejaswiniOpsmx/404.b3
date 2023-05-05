@@ -61,3 +61,10 @@ aws:
   defaultKeyPairTemplate: "{{name}}-keypair"
   defaultRegions:
   - name: "us-west-1"
+ecs:
+  enabled: true
+  accounts:
+  - name: "ecs"
+    permissions: {}
+    awsAccount: "aws"
+    noValidate: false
