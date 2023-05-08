@@ -33,15 +33,8 @@ deploymentConfigurations:
       enabled: false
       accounts: []
     google:
-      enabled: true
-      accounts:
-      - name: "gcp-test1"
-        requiredGroupMembership: []
-        permissions: {}
-        project: "my-orbit-project-71824"
-        jsonPath: "/home/spinnaker/.hal/gcp_gcp-test1.json"
-        alphaListed: false
-        imageProjects: []
+      enabled: false
+      accounts: []
       bakeryDefaults: null
     huaweicloud:
       enabled: false
