@@ -9,13 +9,6 @@ deploymentConfigurations:
     aws:
       enabled: false
       accounts: []
-      bakeryDefaults:
-        baseImages: []
-      defaultKeyPairTemplate: "{{name}}-keypair"
-      defaultRegions:
-      - name: "us-west-2"
-      defaults:
-        iamRole: "BaseIAMRole"
     ecs:
       enabled: false
       accounts: []
