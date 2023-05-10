@@ -35,14 +35,6 @@ deploymentConfigurations:
         jsonPath: "/home/spinnaker/.hal/gcp_gcp-test.json"
         alphaListed: false
         imageProjects: []
-      - name: "gcp-verify"
-        requiredGroupMembership: []
-        permissions: {}
-        project: "my-orbit-project-71824"
-        jsonPath: "/home/spinnaker/.hal/gcp_gcp-verify.json"
-        alphaListed: false
-        imageProjects: []
-        noValidate: false
       - name: "gcp"
         requiredGroupMembership: []
         permissions: {}
