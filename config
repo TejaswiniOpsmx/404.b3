@@ -215,11 +215,8 @@ deploymentConfigurations:
       enabled: false
       masters: []
     gcb:
-      enabled: true
-      accounts:
-      - name: "gcb-test"
-        project: "development-project-210505"
-        subscriptionName: "quotient-gcb1"
+      enabled: false
+      accounts: []
     codebuild:
       enabled: false
       accounts: []
