@@ -220,7 +220,6 @@ deploymentConfigurations:
       - name: "gcbtest"
         project: "sandbox-spin"
         subscriptionName: "cloud-build-sub"
-        noValidate: false
     codebuild:
       enabled: false
       accounts: []
