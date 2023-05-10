@@ -26,8 +26,16 @@ deploymentConfigurations:
       enabled: false
       accounts: []
     google:
-      enabled: false
-      accounts: []
+      enabled: true
+      accounts:
+      - name: "gcptest"
+        requiredGroupMembership: []
+        permissions: {}
+        project: "sandbox-spin"
+        jsonPath: "/home/spinnaker/.hal/gcp_gcptest.json"
+        alphaListed: false
+        imageProjects: []
+        noValidate: false
       bakeryDefaults: null
     huaweicloud:
       enabled: false
