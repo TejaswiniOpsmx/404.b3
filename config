@@ -215,8 +215,12 @@ deploymentConfigurations:
       enabled: false
       masters: []
     gcb:
-      enabled: false
-      accounts: []
+      enabled: true
+      accounts:
+      - name: "gcbtest"
+        project: "sandbox-spin"
+        subscriptionName: "cloud-build-sub"
+        noValidate: false
     codebuild:
       enabled: false
       accounts: []
