@@ -35,7 +35,6 @@ deploymentConfigurations:
         jsonPath: "/home/spinnaker/.hal/gcp_gcptest.json"
         alphaListed: false
         imageProjects: []
-        noValidate: false
       bakeryDefaults: null
     huaweicloud:
       enabled: false
